@@ -1,58 +1,56 @@
 package axis;
 
+import Configuration.ConfigFileReader;
+import axis.webpages.Account;
+import axis.webpages.Login;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import Configuration.ConfigFileReader;
-import axis.contents;
-
 import java.io.File;
 
-public class login {
+public class LoginAndAccountTest {
+
     public WebDriver driver;
     private ConfigFileReader configfilereader;
 
     @BeforeMethod
-    public void setup() throws InterruptedException {
+    public void setup() throws Exception {
         String userProfile= "C:\\Users\\soyoolag\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 2";
-        //String test="C:\\Users\\soyoolag\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 2";
         ChromeOptions options = new ChromeOptions();
         options.addArguments("user-data-dir="+userProfile);
-        //options.addArguments("--start-maximized");
         File file = new File(System.getProperty("user.dir")+"/src/test/resources/chromedriver.exe");
-        configfilereader = new ConfigFileReader();
+        //configfilereader = new ConfigFileReader();
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
+        System.out.println("Setup Done");
     }
 
-    @Test(dataProvider="login_data", priority = 0)
-    public void login_function( TestData data  ) throws Exception {
-        System.out.println(configfilereader.getappURL());
-        driver.get("https://axiscommunicationsab2.lightning.force.com/");
+    @Test(dataProvider = "login_data", priority = 0)
+    public void loginAndAccountTest ( TestData data ) throws Exception {
+        Thread.sleep(7000);
+        //System.out.println("tests");
+        Login login = new Login(driver);
+        Assert.assertTrue(login.isPageOpened());
+
+        login.setUsername(data.get(0));
+        login.setPassword(data.get(1));
+        login.setLogin_button();
+        Thread.sleep(7000);
+
+        Account account = new Account(driver);
+        account.clickAccount();
         Thread.sleep(5000);
-        driver.findElement(contents.username).sendKeys(data.get(0));
-        Thread.sleep(1000);
-        driver.findElement(contents.password).sendKeys(data.get(1));
-        Thread.sleep(5000);
-        driver.findElement(contents.Login).click();
-        Thread.sleep(6000);
-        System.out.println("passed");
+        account.clickNew();
     }
 
-    @Test(priority = 1)
-    public void click_account() throws Exception {
-        Thread.sleep(5000);
-        driver.findElement(contents.account).click();
-    }
-
-    @DataProvider(name = "login_function")
+    @DataProvider(name = "loginAndAccountTest")
     public Object [] [] login_data() {
         return new Object[][] {
                 //{ new TestData("hey", "you", "guys") },
@@ -74,9 +72,7 @@ public class login {
     }
 
     @AfterMethod
-    public void closedriver() {
-        System.out.println("Test completed");
-        //driver.quit();
-        //driver.close();
+    public void endSession() {
+        System.out.println("Done");
     }
 }
