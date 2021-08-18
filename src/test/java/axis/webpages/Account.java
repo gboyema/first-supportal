@@ -1,14 +1,11 @@
 package axis.webpages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -20,6 +17,13 @@ public class Account {
 
     @FindBy(how = How.XPATH, using = "//a[@title='Konton']") //slds-truncate
     WebElement accounts;
+
+    @FindAll(@FindBy(how = How.CSS, using = "input.default.input.uiInput.uiInputTextForAutocomplete.uiInput--default.uiInput--input.uiInput.uiAutocomplete.uiInput--default.uiInput--lookup"))
+    List<WebElement> account_name_inputs;
+
+    @FindBy(how = How.XPATH, using = "//button[@title='Spara']")
+    WebElement save_button;
+
 
     public Account (WebDriver driver) {
         this.driver = driver;
@@ -33,5 +37,13 @@ public class Account {
 
     public void clickNew () {
         newr.click();
+    }
+
+    public void setAccount_name_input(String name) {
+        account_name_inputs.get(0).sendKeys(name);
+    }
+
+    public void clickSave_button() {
+        save_button.click();
     }
 }

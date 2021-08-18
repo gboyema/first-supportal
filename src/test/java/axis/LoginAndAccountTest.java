@@ -2,6 +2,7 @@ package axis;
 
 import Configuration.ConfigFileReader;
 import axis.webpages.Account;
+import axis.webpages.Account_details;
 import axis.webpages.Login;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -48,6 +49,24 @@ public class LoginAndAccountTest {
         account.clickAccount();
         Thread.sleep(5000);
         account.clickNew();
+        Thread.sleep(5000);
+        account.setAccount_name_input(data.get(2));
+        account.clickSave_button();
+        Thread.sleep(4000);
+
+//        Account_details account_details = new Account_details(driver);
+//        Thread.sleep(2000);
+//        account_details.clickEdit();
+//        Thread.sleep(2000);
+//        account_details.setAccount_details();
+//        Thread.sleep(4000);
+//        account_details.setAccount_name();
+//        Thread.sleep(2000);
+//        account_details.setAccount_fax();
+//        Thread.sleep(2000);
+//        account_details.setAccount_phone();
+//        Thread.sleep(2000);
+//        account_details.clickCancel_edit();
     }
 
     @DataProvider(name = "loginAndAccountTest")
@@ -55,7 +74,7 @@ public class LoginAndAccountTest {
         return new Object[][] {
                 //{ new TestData("hey", "you", "guys") },
                 //{ new TestData("Sloth", "Baby", "Ruth") },
-                { new TestData("soyoolag-nccm@force.com", "love3611") }
+                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 4") }
         };
     }
 
