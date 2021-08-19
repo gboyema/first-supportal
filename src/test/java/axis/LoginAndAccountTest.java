@@ -54,19 +54,21 @@ public class LoginAndAccountTest {
         account.clickSave_button();
         Thread.sleep(4000);
 
-//        Account_details account_details = new Account_details(driver);
-//        Thread.sleep(2000);
-//        account_details.clickEdit();
-//        Thread.sleep(2000);
-//        account_details.setAccount_details();
-//        Thread.sleep(4000);
+        Account_details account_details = new Account_details(driver);
+        Thread.sleep(2000);
+        account_details.clickEdit();
+        Thread.sleep(2000);
+        account_details.scroll_page();
+        Thread.sleep(4000);
 //        account_details.setAccount_name();
 //        Thread.sleep(2000);
-//        account_details.setAccount_fax();
-//        Thread.sleep(2000);
-//        account_details.setAccount_phone();
-//        Thread.sleep(2000);
-//        account_details.clickCancel_edit();
+        account_details.setAccount_fax( data.get(4));
+        Thread.sleep(2000);
+        account_details.setAccount_phone(data.get(3));
+        Thread.sleep(2000);
+        account_details.setAccount_website(data.get(5));
+        Thread.sleep(2000);
+        account_details.clickSave_edit();
     }
 
     @DataProvider(name = "loginAndAccountTest")
@@ -74,7 +76,7 @@ public class LoginAndAccountTest {
         return new Object[][] {
                 //{ new TestData("hey", "you", "guys") },
                 //{ new TestData("Sloth", "Baby", "Ruth") },
-                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 4") }
+                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 1", "07034567898", "090789867342323", "www.website.com") }
         };
     }
 

@@ -19,22 +19,16 @@ public class Account_details {
     @FindBy(how = How.CSS, using = "div.maincontent")
     WebElement body;
 
-    @FindBy(how = How.NAME, using = "Name")
-    WebElement account_name;
+    @FindAll(@FindBy(how = How.XPATH, using = "//div[@class='maincontent']//input"))
+    List<WebElement> inputs;
 
-    @FindBy(how = How.NAME, using = "Phone")
-    WebElement account_phone;
+    @FindAll(@FindBy(how = How.XPATH, using = "//div[@class='maincontent']//textarea"))
+    List<WebElement> text_area;
 
-    @FindBy(how = How.NAME, using = "Fax")
-    WebElement account_fax;
-
-    @FindBy(how = How.NAME, using = "Website")
-    WebElement account_website;
-
-    @FindBy(how = How.NAME, using = "CancelEdit")
+    @FindBy(how = How.XPATH, using = "//button[text()[contains(.,'Avbryt')]]")
     WebElement cancel_edit;
 
-    @FindBy(how = How.NAME, using = "SaveEdit")
+    @FindBy(how = How.XPATH, using = "//button[text()[contains(.,'Spara')]]")
     WebElement save_edit;
 
     public Account_details(WebDriver driver) {
@@ -47,31 +41,41 @@ public class Account_details {
         edit_button.click();
     }
 
-    public void setAccount_details() {
+    public void scroll_page() {
         body.sendKeys(Keys.ARROW_DOWN);
         body.sendKeys(Keys.ARROW_DOWN);
         body.sendKeys(Keys.ARROW_DOWN);
-
-
-       // account_name.sendKeys("a");
-        //account_fax.sendKeys("b");
-        //account_phone.sendKeys("c");
-        //account_website.sendKeys("d");
     }
 
-    public void setAccount_name() {
-        account_name.sendKeys("a");
+    public void fillInputs() {
+        for (WebElement element: inputs) {
+            element.sendKeys("input");
+        }
     }
 
-    public void setAccount_phone() {
-        account_phone.sendKeys("b");
+    public void fillTextArea() {
+        for (WebElement element: text_area) {
+            element.sendKeys("text");
+        }
     }
 
-    public void setAccount_fax() {
-        account_fax.sendKeys("c");
+    public void setAccount_phone(String phone) {
+        inputs.get(0).sendKeys(phone);
+    }
+
+    public void setAccount_fax(String fax) {
+        inputs.get(2).sendKeys(fax);
+    }
+
+    public void setAccount_website(String website) {
+        inputs.get(4).sendKeys(website);
     }
 
     public void clickCancel_edit() {
         cancel_edit.click();
+    }
+
+    public void clickSave_edit() {
+        save_edit.click();
     }
 }
