@@ -41,7 +41,7 @@ public class Account_details {
         edit_button.click();
     }
 
-    public void scroll_page() {
+    public void scroll_down() {
         body.sendKeys(Keys.ARROW_DOWN);
         body.sendKeys(Keys.ARROW_DOWN);
         body.sendKeys(Keys.ARROW_DOWN);

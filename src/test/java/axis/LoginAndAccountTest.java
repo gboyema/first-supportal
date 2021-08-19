@@ -2,6 +2,7 @@ package axis;
 
 import Configuration.ConfigFileReader;
 import axis.webpages.Account;
+import axis.webpages.Account_contacts;
 import axis.webpages.Account_details;
 import axis.webpages.Login;
 import org.openqa.selenium.WebDriver;
@@ -33,7 +34,7 @@ public class LoginAndAccountTest {
         System.out.println("Setup Done");
     }
 
-    @Test(dataProvider = "login_data", priority = 0)
+    @Test(dataProvider = "login_data")
     public void loginAndAccountTest ( TestData data ) throws Exception {
         Thread.sleep(7000);
         //System.out.println("tests");
@@ -58,7 +59,7 @@ public class LoginAndAccountTest {
         Thread.sleep(2000);
         account_details.clickEdit();
         Thread.sleep(2000);
-        account_details.scroll_page();
+        account_details.scroll_down();
         Thread.sleep(4000);
 //        account_details.setAccount_name();
 //        Thread.sleep(2000);
@@ -69,6 +70,14 @@ public class LoginAndAccountTest {
         account_details.setAccount_website(data.get(5));
         Thread.sleep(2000);
         account_details.clickSave_edit();
+
+        Account_contacts account_contacts = new Account_contacts(driver);
+        Thread.sleep(3000);
+        account_contacts.scroll_up();
+        Thread.sleep(3000);
+        account_contacts.clickContacts_nav();
+        Thread.sleep(5000);
+        account_contacts.add_newContact();
     }
 
     @DataProvider(name = "loginAndAccountTest")
@@ -76,7 +85,7 @@ public class LoginAndAccountTest {
         return new Object[][] {
                 //{ new TestData("hey", "you", "guys") },
                 //{ new TestData("Sloth", "Baby", "Ruth") },
-                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 1", "07034567898", "090789867342323", "www.website.com") }
+                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 6", "07034567898", "090789867342323", "www.website.com") }
         };
     }
 
@@ -94,6 +103,7 @@ public class LoginAndAccountTest {
 
     @AfterMethod
     public void endSession() {
+        driver.quit();
         System.out.println("Done");
     }
 }
