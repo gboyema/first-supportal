@@ -78,6 +78,14 @@ public class LoginAndAccountTest {
         account_contacts.clickContacts_nav();
         Thread.sleep(5000);
         account_contacts.add_newContact();
+        Thread.sleep(5000);
+        account_contacts.setDropdown();
+        Thread.sleep(2000);
+        account_contacts.pick_dropdown();
+        Thread.sleep(2500);
+        account_contacts.setLastname(data.get(6));
+        Thread.sleep(2000);
+        account_contacts.clickSave_edit();
     }
 
     @DataProvider(name = "loginAndAccountTest")
@@ -85,7 +93,7 @@ public class LoginAndAccountTest {
         return new Object[][] {
                 //{ new TestData("hey", "you", "guys") },
                 //{ new TestData("Sloth", "Baby", "Ruth") },
-                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 6", "07034567898", "090789867342323", "www.website.com") }
+                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 7", "07034567898", "090789867342323", "www.website.com", "Lastname") }
         };
     }
 
@@ -103,7 +111,7 @@ public class LoginAndAccountTest {
 
     @AfterMethod
     public void endSession() {
-        driver.quit();
+        //driver.quit();
         System.out.println("Done");
     }
 }
