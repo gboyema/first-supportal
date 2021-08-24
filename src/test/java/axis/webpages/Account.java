@@ -13,7 +13,7 @@ public class Account {
     private WebDriver driver;
 
     @FindBy(how = How.XPATH, using = "//a[@title='Ny']")
-    WebElement newr;
+    WebElement new_account;
 
     @FindBy(how = How.XPATH, using = "//a[@title='Konton']") //slds-truncate
     WebElement accounts;
@@ -36,7 +36,7 @@ public class Account {
     }
 
     public void clickNew () {
-        newr.click();
+        new_account.click();
     }
 
     public void setAccount_name_input(String name) {

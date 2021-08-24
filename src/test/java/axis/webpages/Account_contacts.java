@@ -25,6 +25,9 @@ public class Account_contacts {
     @FindAll(@FindBy(how = How.TAG_NAME, using = "input"))
     List<WebElement> inputs;
 
+    @FindAll(@FindBy(how = How.XPATH, using = "//div/following-sibling::div/ul/li/a"))
+    List<WebElement> links;
+
     @FindAll(@FindBy(how = How.XPATH, using = "//a[@role='button']"))
     List<WebElement> news;
 
@@ -39,6 +42,9 @@ public class Account_contacts {
 
     @FindBy(how = How.XPATH, using = "//button[text()[contains(.,'Spara')]]")
     WebElement save_edit;
+
+    @FindBy(how = How.XPATH, using = "//button[@title='Stäng fönstret']")
+    WebElement close_button;
 
     public Account_contacts(WebDriver driver) {
         this.driver = driver;
@@ -58,16 +64,9 @@ public class Account_contacts {
 
     public void add_newContact() throws Exception {
         System.out.println(news.get(18).getText());
-        for (WebElement element: news
+        for (WebElement element: links
              ) {
             System.out.println(element.getText() + " same");
-        }
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.elementToBeClickable(news.get(21)));
-        try {
-            news.get(18).click();
-        } catch (Exception e) {
-            news.get(21).click();
         }
     }
 
@@ -88,5 +87,9 @@ public class Account_contacts {
 
     public void clickSave_edit() {
         save_edit.click();
+    }
+
+    public void clickClose_button() {
+        close_button.click();
     }
 }

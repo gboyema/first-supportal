@@ -86,6 +86,8 @@ public class LoginAndAccountTest {
         account_contacts.setLastname(data.get(6));
         Thread.sleep(2000);
         account_contacts.clickSave_edit();
+        Thread.sleep(3000);
+        account_contacts.clickClose_button();
     }
 
     @DataProvider(name = "loginAndAccountTest")
@@ -93,7 +95,7 @@ public class LoginAndAccountTest {
         return new Object[][] {
                 //{ new TestData("hey", "you", "guys") },
                 //{ new TestData("Sloth", "Baby", "Ruth") },
-                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 7", "07034567898", "090789867342323", "www.website.com", "Lastname") }
+                { new TestData("soyoolag-nccm@force.com", "love3611", "Account 2", "07034567898", "090789867342323", "www.website.com", "Lastname") }
         };
     }
 
